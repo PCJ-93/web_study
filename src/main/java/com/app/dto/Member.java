@@ -1,17 +1,24 @@
 package com.app.dto;
 
 public class Member {
-	public String id;
-	public String pw;
-	public String name;
 	
+	String id;
+	String pw;
+	String name;
+	String type;
 	
 	public Member() {
 	}
-	public Member(String id, String pw, String name) {
+	public Member(String id, String pw, String name) { // Practice02Controller 전용
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
+	}
+	public Member(String id, String pw, String name, String type) { // Quiz06Controller 전용
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.type = type;
 	}
 	public String getId() {
 		return id;
@@ -31,4 +38,12 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 }
