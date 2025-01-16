@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.controller.study;
 
 import java.util.Map;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.RequestScope;
 
-import com.app.dto.Product;
-import com.app.dto.ProductRequestForm;
+import com.app.dto.study.Product;
+import com.app.dto.study.ProductRequestForm;
 
 @Controller
 public class Request03Controller {

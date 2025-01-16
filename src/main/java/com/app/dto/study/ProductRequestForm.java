@@ -1,4 +1,4 @@
-package com.app.dto;
+package com.app.dto.study;
 
 public class ProductRequestForm {  //product와 다른용도로 사용되는 product
 	
