@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.util.MyCookieUtil;
@@ -97,6 +98,48 @@ public class CookieController {
 		}
 		
 		return "cookie/read-cookie";
+	}
+	
+	@GetMapping("/id-cookie")
+	public String idCookie(HttpServletRequest request) {
+		String remember = MyCookieUtil.getCookie(request, "remember");
+		
+		if(remember != null) {
+			request.setAttribute("remember", remember);
+		}
+		
+		return "cookie/id-cookie";
+	}
+	
+	@PostMapping("/id-cookie")
+	public String idCookieAction(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println(request.getParameter("id"));
+		System.out.println(request.getParameter("pw"));
+		System.out.println(request.getParameter("remember"));
+		String remember = request.getParameter("remember");
+		String id = request.getParameter("id");
+		// id pw < --비교-- > DB에 저장된 데이터
+		// 로그인 성공 - 메인이나 마이페이지등으로 이동(여기선 리드쿠키2페이지)
+		//return "redirect:/read-cookie2";  //read-cookie2 브라우저경로로 넘긴다
+		
+		// 아이디 기억 체크 -> 쿠키에 저장 해두자~
+		if(remember != null) {
+			if(remember.equals("true")) {
+				Cookie ck = MyCookieUtil.createCookie("remember", id);
+				response.addCookie(ck);
+			}
+		}else {
+	        Cookie ck = MyCookieUtil.createCookie("remember", "value");
+	        ck.setMaxAge(0); // 유효기간을 0으로 설정하여 쿠키 삭제
+	        response.addCookie(ck);
+	    }
+		
+		
+		// 로그인 실패
+		// 다시 로그인하는 화면
+		
+		return "cookie/id-cookie";
 	}
 
 }
