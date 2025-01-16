@@ -67,7 +67,7 @@ public class Quiz07Controller {
 		
 		return "redirect:/scopeCheck/first";
 	}
-	
-	
-	
+
+
+
 }
