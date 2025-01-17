@@ -18,6 +18,9 @@ public class RoomController {
 	
 	@GetMapping("/rooms") //접속했을때 보유한 모든 호실 정보 보여주는 페이지
 	public String rooms(Model model) {
+		
+	
+		
 		//호실정보 준비
 		List<Room> roomList = roomService.findRoomList();
 		
