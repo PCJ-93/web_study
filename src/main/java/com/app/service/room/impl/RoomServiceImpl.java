@@ -32,6 +32,12 @@ public class RoomServiceImpl implements RoomService {
 		
 		return roomList;
 	}
+
+	@Override
+	public int saveRoom(Room room) {
+		int result = roomDAO.saveRoom(room);
+		return result;
+	}
 	
 	
 
