@@ -23,12 +23,14 @@ public class AdminController { // 어드민 컨트롤러 만들어서 관리자�
 	public String registerRoom() {
 		return "admin/registerRoom";
 	}
-	
+
 	@PostMapping("/admin/registerRoom")
 	public String registerRoomAction(Room room) {
 		//값넘어온것 확인
-		//System.out.println(room.toString());
+		System.out.println(room.toString());
 		//등록
+		int result = roomService.saveRoom(room);
+		System.out.println(result);
 		
 		return "admin/registerRoom";
 	}
