@@ -21,8 +21,9 @@ public class RoomDAOImpl implements RoomDAO {
 	public List<Room> findRoomList() {
 		System.out.println("룸다오");
 		//db연결 조회
+		List<Room> roomList = sqlSessionTemplate.selectList("room_mapper.findRoomList");
 		
-		return null;
+		return roomList;
 	}
 
 	@Override

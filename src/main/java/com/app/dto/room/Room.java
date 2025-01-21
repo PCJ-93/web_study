@@ -20,6 +20,7 @@ public class Room {
 	String viewType; // OCN /CTY /MOT .. 오션뷰 시티뷰 마운틴뷰
 	
 	
+	
 	// 뒤늦게 추가된 정보들을 편하게 getter setter tostring 생성자 관리해주는 lombok 라이브러리
 	// lombok 없었으면 accomodationId 만들때 다 일일히 만들어줘야댐
 	//int accomodationId;

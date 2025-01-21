@@ -33,6 +33,10 @@
 										#{maxGuestCount},
 										#{viewType}     )  <!-- DAO의 ?같은 놈들(DTO 에 변수값과 맞춘것..pk빼고(pk값은 seq로 자동적용)) -->
 	</insert>
+	
+	<select id="findRoomList" resultType="Room">
+		SELECT * FROM T_ROOM ORDER BY room_id
+	</select>
 
 
 </mapper>
