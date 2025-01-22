@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>메인페이지</h1>
+	<h1>quiz main</h1>
+	
+	${data1}
+	${data2}
 </body>
 </html>

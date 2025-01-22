@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>상품페이지 B</h1>
-		<p>${item}</p>
-	<p>${type}</p>
+pathB
 </body>
 </html>

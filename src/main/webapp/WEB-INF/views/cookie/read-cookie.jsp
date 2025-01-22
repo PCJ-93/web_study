@@ -8,7 +8,6 @@
 </head>
 <body>
 	<h1>read-cookie</h1>
-	
 	<h2>${weather}</h2>
 </body>
 </html>

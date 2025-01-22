@@ -1,53 +1,66 @@
 package com.app.controller.study;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Quiz08Controller {
 
 	@GetMapping("/quiz/session/login")
 	public String login() {
-		return "quiz/session/login";
+		
+		
+		return "quiz/quiz08/login"; 
 	}
-
+	
 	@PostMapping("/quiz/session/login")
-	public ModelAndView login(@RequestParam String id, @RequestParam String pw, HttpSession session) {
-		if (id != null && !id.isEmpty()) {
-			session.setAttribute("userId", id);
-			session.setAttribute("count", 0);
-		}
-		return new ModelAndView("redirect:/quiz/session/count");
+	public String loginAction(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		
+		//id pw <-> 데이터 비교 -> 정상인지 체크
+		HttpSession session = request.getSession();
+		
+		//로그인 성공 이라고 간주!
+		//session.setAttribute("isLogin", true);
+		session.setAttribute("loginId", id); //A B
+		session.setAttribute("count", 0);
+		
+		// 로그인 후 -> 내가 쓴 게시글
+		// DB조회
+		return "redirect:/quiz/session/count";
+		
 	}
-
+	
 	@GetMapping("/quiz/session/count")
-	public ModelAndView count(HttpSession session) {
-		ModelAndView mav = new ModelAndView("quiz/session/count");
-
-		String userId = (String) session.getAttribute("userId");
-		Integer count = (Integer) session.getAttribute("count");
-
-		if (userId == null) {
-			
+	public String count(HttpSession session, Model model) {
+		
+		//로그인 한 상태면? count 증가
+		if(session.getAttribute("loginId") != null) {
+			//count 값 증가
+			session.setAttribute("count", ((Integer)session.getAttribute("count")) + 1 );
 		} else {
-			count = (count == null ? 0 : count + 1);
-			session.setAttribute("count", count);
-
-			mav.addObject("userId", userId);
-			mav.addObject("count", count);
+			model.addAttribute("count", 0);
 		}
-
-		return mav;
+		//로그인 안한 상태면? 접속한사용자없다~ count 0 ~ 
+		
+		return "quiz/quiz08/count";
 	}
-
+	
 	@GetMapping("/quiz/session/logout")
-	public ModelAndView logout(HttpSession session) {
+	public String logout(HttpSession session) {
+		//세션에 저장된 정보 삭제
+		//session.removeAttribute("loginId");
+		//session.removeAttribute("1ount");
+		
+		//초기화
 		session.invalidate();
-		return new ModelAndView("redirect:/quiz/session/count");
+		
+		return "redirect:/quiz/session/count";
 	}
 }

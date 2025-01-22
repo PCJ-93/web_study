@@ -1,7 +1,6 @@
 package com.app.dto.study;
 
-public class ProductRequestForm {  //product와 다른용도로 사용되는 product
-	
+public class ProductRequestForm {
 	public String id;
 	public String name;
 	public int price;
@@ -24,5 +23,6 @@ public class ProductRequestForm {  //product와 다른용도로 사용되는 pro
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	
+	
 }

@@ -35,13 +35,13 @@ public class Quiz07Controller {
 		//request scope 삭제 -> session scope 인식
 		//session scope -> request scope 이동 시켜서 request 가 자동으로 인식
 		
-		return "prac01/prac01/targetPage";
+		return "quiz/quiz07/targetPage";
 	}
 	
 	@GetMapping("/scopeCheck/firsthide1")
 	public String firsthide1(Model model) {
 		model.addAttribute("accessUrl", "/firsthide1");
-		return "prac01/prac01/targetPage";
+		return "quiz/quiz07/targetPage";
 	}
 	
 	//기본 버전
@@ -67,7 +67,7 @@ public class Quiz07Controller {
 		
 		return "redirect:/scopeCheck/first";
 	}
-
-
-
+	
+	
+	
 }

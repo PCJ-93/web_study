@@ -1,42 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="room_mapper"> <!-- mybatis 양식 -->
-	<!-- 이거는 양식 자료 예시다 -->
-	<!-- <select id="findLoginUser" -->
-	<!-- parameterType="com.rsrvapp.dto.user.User" -->
-	<!-- resultType="com.rsrvapp.dto.user.User"> -->
-	<!-- SELECT * FROM MY_USER WHERE id=#{id} and pw=#{pw} -->
-	<!-- </select> -->
+<mapper namespace="room_mapper">
 
-	<!-- <insert id="saveUser" parameterType="com.rsrvapp.dto.user.User"> -->
-	<!-- insert into MY_USER values ( #{id}, #{pw}, #{name} ) DAO의 ?같은 놈들 -->
-	<!-- </insert> -->
-
-	<!-- <select id="findUserList" resultType="com.rsrvapp.dto.user.User"> -->
-	<!-- SELECT * FROM MY_USER -->
-	<!-- </select> -->
-
-	<!-- <select id="findUserListByUserType" -->
-	<!-- resultType="com.rsrvapp.dto.user.User" parameterType="String"> -->
-	<!-- SELECT * FROM MY_USER -->
-	<!-- WHERE userType = #{userType} -->
-	<!-- </select> -->
-	<!-- 여기까지 양식 자료 예시다 -->
-
-
-	<insert id="saveRoom" parameterType="com.app.dto.room.Room">
-		insert into T_ROOM values ( SEQ_T_ROOM_PK.nextval,
-										#{buildingNumber},
-										#{roomNumber},
-										#{floor},
-										#{maxGuestCount},
-										#{viewType}     )  <!-- DAO의 ?같은 놈들(DTO 에 변수값과 맞춘것..pk빼고(pk값은 seq로 자동적용)) -->
+	<insert id="saveRoom" parameterType="Room">
+		insert into T_ROOM values ( SEQ_T_ROOM_PK.nextval, 
+									#{buildingNumber},
+									#{roomNumber},
+									#{floor},
+									#{maxGuestCount},
+									#{viewType} )
 	</insert>
 	
 	<select id="findRoomList" resultType="Room">
-		SELECT * FROM T_ROOM ORDER BY room_id
+		SELECT * 
+		FROM T_ROOM
 	</select>
-
-
+	
+	<select id="findRoomByRoomId" resultType="Room" parameterType="int">
+		SELECT *
+		FROM T_ROOM
+		WHERE room_id = #{roomId}
+	</select>
+	
+	<delete id="removeRoom" parameterType="int">
+		DELETE FROM T_ROOM
+		WHERE room_id = #{roomId}
+	</delete>
+	
 </mapper>

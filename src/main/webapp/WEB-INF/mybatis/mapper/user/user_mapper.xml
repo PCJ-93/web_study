@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="user_mapper"> <!-- mybatis 양식 -->
+<mapper namespace="user_mapper">
+
+	
+<!-- 	<insert id="saveUser" parameterType="User"> -->
+<!-- 		insert into T_USER -->
+<!-- 		(id, name, user_type)  -->
+<!-- 		values ( -->
+<!-- 			#{id}, -->
+<!-- 			#{name}, -->
+<!-- 			'CUS' -->
+<!-- 		) -->
+<!-- 	</insert> -->
+	
+	<insert id="saveUser" parameterType="User">
+		insert into T_USER
+		values (
+			#{id},
+			#{pw},
+			#{name},
+			#{userType}
+		)
+	</insert>
+	
+	<select id="findUserList" resultType="User">
+		select * from T_USER order by id
+	</select>
+	
 
 </mapper>

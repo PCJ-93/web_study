@@ -7,16 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>파람1페이지</h1>
-<div>
-	<form action="/param2" method="post">
-		<input type="text" name="name"><br/>
-		<input type="text" name="count"><br/>
-		<button type="submit">전송</button>
-	</form>
+	<h1>requestParam param1 페이지</h1>
 	
-	<a href = "/param2?name=1234&count=32104">param2로</a>
+	<div>
 	
-</div>
+		<form action="/param2" method="post">
+			<input type="text" name="abc"><br/>
+			<input type="text" name="def"><br/>
+			<button type="submit">전송</button>
+		</form>
+		
+		<a href="/param2?abc=asodf&def=12313">param2로</a>
+	
+	</div>
 </body>
 </html>

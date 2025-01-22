@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>RE3 페이지</h1>
-
-
 	<script>
 		location.href = "/re/re2";
 	</script>

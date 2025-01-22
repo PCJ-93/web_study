@@ -1,17 +1,10 @@
 package com.app.dto.study;
 
 public class ResponseItem {
-	
+
 	String response001;
 	String response099;
 	
-	
-	public ResponseItem() {
-	}
-	public ResponseItem(String response001, String response099) {
-		this.response001 = response001;
-		this.response099 = response099;
-	}
 	public String getResponse001() {
 		return response001;
 	}
@@ -25,5 +18,4 @@ public class ResponseItem {
 		this.response099 = response099;
 	}
 	
-
 }

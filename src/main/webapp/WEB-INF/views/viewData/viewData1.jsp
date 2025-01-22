@@ -9,13 +9,13 @@
 <body>
 	<h1>viewData1 페이지</h1>
 	
-<%-- <%=request.getAttribute("state") %> <!-- 이거잘안쓰고 아래의 ${}를 자주 쓴다 --> --%>
-	<%= request.getAttribute("time") %>
+	<%=request.getAttribute("state")%>
+	<%=request.getAttribute("time")%>
 	
 	<p>${state}</p>
 	<div>
-	<p>${time}</p>
-	<span>${state}</span>
+		<p></p>
+		<span>${time}</span>
 	</div>
 </body>
 </html>

@@ -7,12 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>SCOPE 페이지</h1>
-	
+	<h1>scope1</h1>
 	<p>${requestMsg}</p>
 	<p>${requestScope.requestMsg}</p>
 	
-	<p>${applicationMsg }</p>
-	<p>${applicationScope.applicationMsg }</p>
 </body>
 </html>
