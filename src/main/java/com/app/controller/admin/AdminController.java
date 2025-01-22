@@ -101,6 +101,35 @@ public class AdminController {
 //		}
 	}
 	
+	// 객실 정보 수정
+	@GetMapping("/admin/modifyRoom")
+	public String modifyRoom(HttpServletRequest request) {
+		String roomId = request.getParameter("roomId");
+		int roomIdInt = Integer.parseInt(roomId);
+		// roomId로 해당호실에 대한 정보 조회 후 화면에 세팅한다
+		Room room = roomService.findRoomByRoomId(roomIdInt);
+		
+		request.setAttribute("room", room);
+		
+		return "admin/modifyRoom";
+	}
+	
+	@PostMapping("/admin/modifyRoom")
+	public String modifyRoomAction(Room room) {
+		int result = roomService.modifyRoom(room);
+		
+		if(result > 0) { // 수정 성공 -> 목록페이지 or 호실상세정보페이지 로 이동
+			//return "redirect:/admin/rooms";  //목록 페이지
+			return "redirect:/admin/room/" + room.getRoomId();  // 호실 상세 정보 페이지
+		}else { // 수정 실패 -> 다시 수정페이지로 보낸다
+			return "redirect:/admin/modifyRoom?roomId=" + room.getRoomId();
+		}
+		
+
+	}
+	
+	
+	
 	
 	
 	//고객 관리/등록
@@ -135,7 +164,6 @@ public class AdminController {
 		model.addAttribute("userList", userList);
 		
 		return "admin/users";
-		
 	}
 	
 	
