@@ -28,5 +28,25 @@
 		select * from T_USER order by id
 	</select>
 	
+	<select id="findUserById" resultType="User" parameterType="String">
+		select * from t_user where id = #{id}
+	</select>
+	
+	<select id="checkUserLogin" resultType="User" parameterType="User">
+		select *
+		from t_user
+		where id = #{id}
+		and pw = #{pw}
+		and user_type = #{userType}
+	</select>
+	
 
 </mapper>
+
+
+
+
+
+
+
+
