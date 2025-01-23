@@ -25,35 +25,31 @@
 	</insert>
 	
 	<select id="findUserList" resultType="User">
-		select * from T_USER order by id
+		select * from T_USER
 	</select>
 	
+	
 	<select id="findUserById" resultType="User" parameterType="String">
-		select * from t_user where id = #{id}
+		select *
+		FROM T_USER
+		WHERE id = #{id}	
 	</select>
 	
 	<select id="checkUserLogin" resultType="User" parameterType="User">
 		select *
-		from t_user
-		where id = #{id}
-		and pw = #{pw}
-		and user_type = #{userType}
+		from T_USER
+		where id = #{id} AND pw = #{pw} AND user_type = #{userType}
 	</select>
 	
 	<update id="modifyUser" parameterType="User">
 		UPDATE T_USER
-		SET
-			id = #{id},
-			pw = #{pw},
+		SET pw = #{pw},
 			name = #{name},
 			user_type = #{userType}
 		WHERE id = #{id}
 	</update>
-	
 
 </mapper>
-
-
 
 
 

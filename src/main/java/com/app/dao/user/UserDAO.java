@@ -14,5 +14,5 @@ public interface UserDAO {
 	
 	public User checkUserLogin(User user);
 	
-	int modifyUser(User user);
+	public int modifyUser(User user);
 }

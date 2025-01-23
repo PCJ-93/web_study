@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.app.common.CommonCode;
 import com.app.dto.room.Room;
 import com.app.dto.user.User;
 import com.app.service.room.RoomService;
@@ -45,7 +46,7 @@ public class AdminController {
 		} else {
 			return "admin/registerRoom";	
 		}
-
+		
 	}
 	
 	//관리자 객실 목록 확인
@@ -60,7 +61,7 @@ public class AdminController {
 			
 		return "admin/rooms";
 	}
-
+	
 	//관리자 특정 객실에 대한 정보 (상세페이지)
 	
 	//
@@ -101,12 +102,13 @@ public class AdminController {
 //		}
 	}
 	
-	// 객실 정보 수정
+	//객실 정보 수정
 	@GetMapping("/admin/modifyRoom")
 	public String modifyRoom(HttpServletRequest request) {
 		String roomId = request.getParameter("roomId");
 		int roomIdInt = Integer.parseInt(roomId);
-		// roomId로 해당호실에 대한 정보 조회 후 화면에 세팅한다
+		//roomId -> 해당 호실에 대한 정보 조회
+		// 화면에 세팅
 		Room room = roomService.findRoomByRoomId(roomIdInt);
 		
 		request.setAttribute("room", room);
@@ -116,37 +118,35 @@ public class AdminController {
 	
 	@PostMapping("/admin/modifyRoom")
 	public String modifyRoomAction(Room room) {
+		//roomId
+		
+		System.out.println(room);
 		int result = roomService.modifyRoom(room);
 		
-		if(result > 0) { // 수정 성공 -> 목록페이지 or 호실상세정보페이지 로 이동
-			//return "redirect:/admin/rooms";  //목록 페이지
-			return "redirect:/admin/room/" + room.getRoomId();  // 호실 상세 정보 페이지
-		}else { // 수정 실패 -> 다시 수정페이지로 보낸다
+		if(result > 0 ) { //수정 성공 -> 목록 or 호실상세정보 페이지
+			return "redirect:/admin/room/" + room.getRoomId();		
+		} else {  //수정 실패 -> 다시 수정페이지로
+			//return "admin/modifyRoom";
 			return "redirect:/admin/modifyRoom?roomId=" + room.getRoomId();
 		}
 		
-
 	}
-	
-	
 	
 	
 	
 	//고객 관리/등록
 	
-	//유저 추가 페이지
 	@GetMapping("/admin/users/add")
 	public String addUser() {
 		
 		return "admin/addUser";
 	}
 	
-	//유저 추가 페이지 받는거
 	@PostMapping("/admin/users/add")
 	public String addUserAction(User user) {
 		//사용자 추가 (관리자X)
 		
-		user.setUserType("CUS");
+		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
 		int result = userService.saveUser(user);
 		//int result = userService.saveCustomerUser(user);
 		System.out.println("사용자 추가 처리 결과 : " + result);
@@ -158,7 +158,6 @@ public class AdminController {
 		}
 	}
 	
-	//유저들정보 표시페이지
 	@GetMapping("/admin/users")
 	public String users(Model model) {
 		
@@ -167,33 +166,11 @@ public class AdminController {
 		model.addAttribute("userList", userList);
 		
 		return "admin/users";
-	}
-	
-	//유저 수정페이지
-	@GetMapping("/admin/modifyUser")
-	public String modifyUser(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		User user = userService.findUserById(id);
-		request.setAttribute("user", user);
-		return "admin/modifyUser";
-	}
-	
-	//유저 수정페이지 받는거
-	@PostMapping("admin/modifyUser")
-	public String modifyUserAction(User user) {
-		int result = userService.modifyUser(user);
 		
-		if(result > 0) {
-			System.out.println("정상처리됨");
-			return "redirect:/admin/users";
-		}else {
-			System.out.println("저장실패");
-			return "redirect:/admin/modifyUser?id=" + user.getId();
-		}
 	}
-
-	// 유저 상세페이지
-	@GetMapping("/admin/users/{id}")
+	
+	//고객 상세페이지
+	@GetMapping("/admin/user/{id}")
 	public String user(@PathVariable String id, Model model) {
 		
 		User user = userService.findUserById(id);
@@ -202,6 +179,30 @@ public class AdminController {
 		return "admin/user";
 	}
 	
+	//사용자정보 수정 페이지
+	@GetMapping("/admin/modifyUser/{id}")
+	public String modifyUser(@PathVariable String id, Model model) {
+		
+		User user = userService.findUserById(id);
+		model.addAttribute("user", user);
+		
+		return "admin/modifyUser";
+	}
+	
+	@PostMapping("/admin/modifyUser")
+	public String modifyUserAction(User user) {
+		
+		System.out.println(user);
+		
+		int result = userService.modifyUser(user);
+		
+		if(result > 0 ) {
+			return "redirect:/admin/user/" + user.getId();
+		} else {
+			return "redirect:/admin/modifyUser/" + user.getId();
+		}
+		
+	}
 	
 	
 }
