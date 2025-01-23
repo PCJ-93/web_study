@@ -19,6 +19,7 @@
 			<c:when test="${user.userType == 'ADM'}">관리자</c:when>
 		</c:choose>
 		</p>
+		<button type="button" onClick="location.href='/admin/modifyUser?id=${user.id}'">수정하기</button>
 		
 	</c:forEach>
 	

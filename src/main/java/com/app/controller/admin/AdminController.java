@@ -45,7 +45,7 @@ public class AdminController {
 		} else {
 			return "admin/registerRoom";	
 		}
-		
+
 	}
 	
 	//관리자 객실 목록 확인
@@ -60,7 +60,7 @@ public class AdminController {
 			
 		return "admin/rooms";
 	}
-	
+
 	//관리자 특정 객실에 대한 정보 (상세페이지)
 	
 	//
@@ -134,12 +134,14 @@ public class AdminController {
 	
 	//고객 관리/등록
 	
+	//유저 추가 페이지
 	@GetMapping("/admin/users/add")
 	public String addUser() {
 		
 		return "admin/addUser";
 	}
 	
+	//유저 추가 페이지 받는거
 	@PostMapping("/admin/users/add")
 	public String addUserAction(User user) {
 		//사용자 추가 (관리자X)
@@ -156,6 +158,7 @@ public class AdminController {
 		}
 	}
 	
+	//유저들정보 표시페이지
 	@GetMapping("/admin/users")
 	public String users(Model model) {
 		
@@ -164,6 +167,39 @@ public class AdminController {
 		model.addAttribute("userList", userList);
 		
 		return "admin/users";
+	}
+	
+	//유저 수정페이지
+	@GetMapping("/admin/modifyUser")
+	public String modifyUser(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		User user = userService.findUserById(id);
+		request.setAttribute("user", user);
+		return "admin/modifyUser";
+	}
+	
+	//유저 수정페이지 받는거
+	@PostMapping("admin/modifyUser")
+	public String modifyUserAction(User user) {
+		int result = userService.modifyUser(user);
+		
+		if(result > 0) {
+			System.out.println("정상처리됨");
+			return "redirect:/admin/users";
+		}else {
+			System.out.println("저장실패");
+			return "redirect:/admin/modifyUser?id=" + user.getId();
+		}
+	}
+
+	// 유저 상세페이지
+	@GetMapping("/admin/users/{id}")
+	public String user(@PathVariable String id, Model model) {
+		
+		User user = userService.findUserById(id);
+		model.addAttribute("user", user);
+		
+		return "admin/user";
 	}
 	
 	
