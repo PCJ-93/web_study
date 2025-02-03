@@ -7,9 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.app.common.ApiCommonCode;
 import com.app.common.CommonCode;
+import com.app.dto.api.ApiResponse;
+import com.app.dto.api.ApiResponseHeader;
 import com.app.dto.user.User;
+import com.app.dto.user.UserDupCheck;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
 
@@ -37,6 +44,50 @@ public class CustomerController {
 			System.out.println("저장실패");
 			return "customer/signup";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/customer/checkDupId")
+	public String checkDupId(@RequestBody String data) {
+		System.out.println("/customer/checkDupId 요청 들어옴");
+		System.out.println(data);
+		
+		//매개변수 data : 중복여부를 확인하고 싶은 아이디
+		
+		//id 중복 여부 체크 -> 결과 return
+		boolean result = userService.isDuplicatedId(data);
+		
+		if(result) {
+			return "Y중복"; // 중복이면 Y
+		}else {
+			return "N안중복"; // 중복아니면 N
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/customer/checkDupIdJson")
+	public ApiResponse<String> checkDupIdJson(@RequestBody UserDupCheck userDupCheck) {
+		System.out.println("/customer/checkDupIdJson 요청 들어옴");
+		System.out.println(userDupCheck);
+		
+		//매개변수 data : 중복여부를 확인하고 싶은 아이디
+		
+		//id 중복 여부 체크 -> 결과 return
+		boolean result = userService.isDuplicatedId(userDupCheck.getId());
+		
+		ApiResponse<String> apiResponse = new ApiResponse<String>();
+		ApiResponseHeader header = new ApiResponseHeader();
+		header.setResultCode(ApiCommonCode.API_RESULT_SUCCESS);
+		header.setResultMessage(ApiCommonCode.API_RESULT_SUCCESS_MSG);
+		
+		apiResponse.setHeader(header);
+		
+		if(result) {
+			apiResponse.setBody("Y");
+		}else {
+			apiResponse.setBody("N");
+		}
+		return apiResponse;
 	}
 	
 	@GetMapping("/customer/login")
