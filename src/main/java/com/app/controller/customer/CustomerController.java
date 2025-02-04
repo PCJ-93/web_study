@@ -20,8 +20,10 @@ import com.app.dto.user.UserDupCheck;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
 
+import lombok.extern.slf4j.Slf4j;
 import oracle.jdbc.proxy.annotation.Post;
 
+@Slf4j
 @Controller
 public class CustomerController {
 	
@@ -51,6 +53,7 @@ public class CustomerController {
 	public String checkDupId(@RequestBody String data) {
 		System.out.println("/customer/checkDupId 요청 들어옴");
 		System.out.println(data);
+		log.info("{} id 중복체크 시도함" , data);
 		
 		//매개변수 data : 중복여부를 확인하고 싶은 아이디
 		

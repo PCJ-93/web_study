@@ -18,6 +18,10 @@ import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
 import com.app.service.user.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
+//로그 사용 어노테이션
+@Slf4j
 @Controller
 public class AdminController {
 	
@@ -53,6 +57,8 @@ public class AdminController {
 	//관리자 객실 목록 확인
 	@GetMapping("/admin/rooms")
 	public String rooms(Model model) {
+		
+		System.out.println("/admin/rooms 경로 접근 확인");
 		
 		List<Room> roomList = roomService.findRoomList();
 		//service.findRoomList 호출 -> DAO findRoomList -> DB (Mybatis mapper) select 
