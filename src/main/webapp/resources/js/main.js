@@ -1,0 +1,1 @@
+console.log('여기는 main.js 파일입니다.');
