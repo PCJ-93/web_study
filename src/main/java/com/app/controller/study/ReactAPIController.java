@@ -116,6 +116,11 @@ public class ReactAPIController {
 		System.out.println("발행 accessToken : " + accessToken);
 		
 		return accessToken;
+		
+		// accessToken 만 전달
+		// header, body
+		// header : code, msg
+		// body : accessToken, userId, userType, userName, userEmail ...
 	}
 	
 	@PostMapping("/api/loginCheckJWT")
