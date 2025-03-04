@@ -12,28 +12,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class Quiz11RestController {
 	
-	@GetMapping("/rest/quiz1")
-	public String quiz1() {
-		return "rest/quiz1";
-	}
+//	@GetMapping("/rest/quiz1")
+//	public String quiz1() {
+//		return "rest/quiz1";
+//	}
 	
-	@ResponseBody
-	@GetMapping("/rest/quiz2")
-	public String quiz2() {
-		return "return text quiz2";
-	}
+//	@ResponseBody
+//	@GetMapping("/rest/quiz2")
+//	public String quiz2() {
+//		return "return text quiz2";
+//	}
 	
-	@ResponseBody
-	@GetMapping("rest/quiz3")
-	public User quiz3ToJason() {
-		User user = new User();
-		user.setId("quizid");
-		user.setPw("secret");
-		user.setName("quiz이름");
-		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
-		
-		return user;
-	}
+//	@ResponseBody
+//	@GetMapping("rest/quiz3")
+//	public User quiz3ToJason() {
+//		User user = new User();
+//		user.setId("quizid");
+//		user.setPw("secret");
+//		user.setName("quiz이름");
+//		user.setUserType(CommonCode.USER_USERTYPE_CUSTOMER);
+//		
+//		return user;
+//	}
 	
 //	@ResponseBody
 //	@GetMapping("rest/quiz3")

@@ -8,9 +8,14 @@ import org.springframework.stereotype.Service;
 import com.app.common.CommonCode;
 import com.app.dao.user.UserDAO;
 import com.app.dto.user.User;
+import com.app.dto.user.UserProfileImage;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.user.UserService;
+import com.app.validator.UserCustomValidator;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -36,9 +41,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int saveAdminUser(User user) {
+		
 		//관리자 추가 전 검증 로직
 		user.setUserType(CommonCode.USER_USERTYPE_ADMIN);
 		int result = userDAO.saveUser(user);
+		
+		System.out.println("user가 무슨 값이 들어가는지 확인" + user);
+		log.info("user가 무슨 값이 들어가는지 확인" + user);
+		
 		return result;
 	}
 
@@ -109,6 +119,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findUserListBySearchCondition(UserSearchCondition userSearchCondition) {
+
 		List<User> userList = userDAO.findUserListBySearchCondition(userSearchCondition);
 		
 		return userList;
@@ -117,14 +128,34 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean isDuplicatedId(String id) {
+					//이 아이디가 중복입니까~?
+		
 		//중복체크
 		User user = userDAO.findUserById(id);
 		
-		if(user == null) { //객체가 없다 => 중복X
+		if(user == null) {	//객체가 없다 -> 중복X
 			return false;
-		}else { //해당 아이디와 동일한 객체가 있다 => 중복O
+		} else { //해당 아이디와 동일한 객체가 있다 -> 중복O
 			return true;
 		}
+	}
+
+
+	@Override
+	public int saveUserProfileImage(UserProfileImage userProfileImage) {
+		
+		int result = userDAO.saveUserProfileImage(userProfileImage);
+		
+		return result;
+	}
+
+
+	@Override
+	public UserProfileImage findUserProfileImageById(String id) {
+		
+		UserProfileImage userProfileImage = userDAO.findUserProfileImageById(id);
+		
+		return userProfileImage;
 	}
 
 }

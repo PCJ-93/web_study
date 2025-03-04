@@ -7,5 +7,4 @@ public class UserDupCheck {
 
 	String id;
 	String type;
-	
 }

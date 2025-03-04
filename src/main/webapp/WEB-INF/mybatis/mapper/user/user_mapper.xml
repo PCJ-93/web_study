@@ -48,34 +48,34 @@
 			user_type = #{userType}
 		WHERE id = #{id}
 	</update>
-	
-	<select id="findUserListBySearchCondition" parameterType="UserSearchCondition" resultType="User" >
-	SELECT *
-	FROM T_USER
-	<where>
-		<if test="id != null and id != '' or name != null and name != ''">
-			(
-			<if test="id != null and id != ''">
-				id LIKE '%' || #{searchKeyword} || '%'
-			</if>
-			<if test="name != null and name != ''">
-				<if test="id != null and id != ''">
-					OR name LIKE '%' || #{searchKeyword} || '%'
-				</if>
-				<if test="id == null or id == ''">
-					name LIKE '%' || #{searchKeyword} || '%'
-				</if>
-			</if>
-			)
-		</if>
-		<if test="userType != null and userType != ''">
-			AND user_type = #{userType}
-		</if>
-	</where>
+
+	<select id="findUserListBySearchCondition" parameterType="UserSearchCondition" resultType="User">
 		
+		SELECT *
+		FROM T_USER
+		<where>
+			<if test="id != null and id != '' or name != null and name != ''">
+				(
+					<if test="id != null and id != ''">
+						id LIKE '%' || #{searchKeyword} || '%'
+					</if>
+					<if test="name != null and name != ''">
+						<if test="id != null and id != ''">
+							OR name LIKE '%' || #{searchKeyword} || '%'
+						</if>
+						<if test="id == null or id == ''">
+							name LIKE '%' || #{searchKeyword} || '%'
+						</if>
+					</if>
+				)
+			</if>
+			<if test="userType != null and userType != ''">
+				AND user_type = #{userType}
+			</if>
+		</where>
 		
-<!--1=2추가해서해결 		<where>  <where>사용하면 뒤에 OR이 결과에따라서 알아서 적용된다 좋다 -->
-<!-- 			<if test = "id != null and id != '' or name != null and name != ''"> -->
+<!-- 		<where> -->
+<!-- 			<if test="id != null and id != '' or name != null and name != ''"> -->
 <!-- 				( -->
 <!-- 					1=2 -->
 <!-- 					<if test="id != null and id != ''"> -->
@@ -85,28 +85,14 @@
 <!-- 						OR name LIKE '%' || #{searchKeyword} || '%' -->
 <!-- 					</if> -->
 <!-- 				) -->
-<!-- 			</if>	 -->
-<!-- 			<if test = "userType != null and userType != ''"> -->
-<!-- 				AND user_type = #{userType} -->
 <!-- 			</if> -->
-<!-- 		</where> -->
-		
-<!--괄호없애서해결		<where>  <where>사용하면 뒤에 OR이 결과에따라서 알아서 적용된다 좋다 -->
-<!-- 			<if test = "id != null and id != '' or name != null and name != ''"> -->
-<!-- 					<if test="id != null and id != ''"> -->
-<!-- 						id LIKE '%' || #{searchKeyword} || '%' -->
-<!-- 					</if> -->
-<!-- 					<if test="name != null and name != ''"> -->
-<!-- 						OR name LIKE '%' || #{searchKeyword} || '%' -->
-<!-- 					</if> -->
-<!-- 			</if> -->
-<!-- 			<if test = "userType != null and userType != ''"> -->
+<!-- 			<if test="userType != null and userType != ''"> -->
 <!-- 				AND user_type = #{userType} -->
 <!-- 			</if> -->
 <!-- 		</where> -->
 		
 		
-<!--옛날방법	WHERE -->
+<!-- 		WHERE -->
 <!-- 			1=2 -->
 <!-- 			<if test="id != null and id != ''"> -->
 <!-- 				OR id LIKE '%' || #{searchKeyword} || '%' -->
@@ -116,6 +102,24 @@
 <!-- 			</if> -->
 	</select>
 	
+		<insert id="saveUserProfileImage" parameterType="UserProfileImage">
+		insert into USER_PROFILE_IMAGE
+		values (
+			#{id},
+			#{fileName}
+		)
+	</insert>
+	
+	<select id="findUserProfileImageById" parameterType="String" resultType="UserProfileImage">
+		
+		select * 
+		from user_profile_image
+		where id = #{id}
+		
+	</select>
+
+
+
 
 </mapper>
 

@@ -8,23 +8,22 @@ import lombok.Data;
 
 @Data
 public class User {
-	//이것들은 common에 넣어서 관리하면 편하다~
+	
 //	public static final String USERTYPE_CUSTOMER = "CUS";
 //	public static final String USERTYPE_ADMIN = "ADM";
-
-	@NotBlank(message="이거 필수입력해")
+	
+//	@NotBlank(message = "이거 필수 입력이라니까?")
 	String id;
 	
-	@NotBlank
-	@Size(min = 8, max = 12, message="8자리 이상 12자리 이하만 가능")
+//	@NotBlank
+//	@Size(min = 8, max=12, message="8자리 이상 쓰고 12자리까지만 가능")
 	String pw;
 	
-	@NotBlank
+//	@Email
 	String name;
 	
-	@NotBlank
 	String userType;  // CUS(Customer)   ADM(Admin)
 	
-//	@Email
-//	String email;
+	
+	
 }

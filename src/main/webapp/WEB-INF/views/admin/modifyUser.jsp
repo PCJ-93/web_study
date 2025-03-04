@@ -19,7 +19,7 @@
 		사용자 이름 : <input type="text" name="name" value="${user.name}"> <br>
 		
 		<br>
-		사용자 타입 선택 : 
+		사용자 타입 선택
 		<label>고객<input type="radio" name="userType" value="CUS" <c:if test="${user.userType == 'CUS'}"> checked </c:if> ></label>
 		<label>관리자<input type="radio" name="userType" value="ADM" <c:if test="${user.userType == 'ADM'}"> checked </c:if> ></label>
 		
